@@ -1,0 +1,4 @@
+cod cliente,nombre,apellido1,apellido2,dni,correo,telefono
+C001,Maria,Garcia,Perez,12345678A,maria.garcia@example.com,612345678
+C002,JOSE,LOPEZ,HERNANDEZ,87654321B,jose.lopez@example.com,612345679
+C003,Ana-Maria,Ruiz,,23456789C,ana.ruiz@example.com,612345680
