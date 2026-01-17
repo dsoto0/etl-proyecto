@@ -1,0 +1,131 @@
+2026-01-17 18:45:40,423 | INFO | Inicio del pipeline ETL
+2026-01-17 18:45:40,424 | INFO | Clientes encontrados: 1
+2026-01-17 18:45:40,424 | INFO | Tarjetas encontradas: 1
+2026-01-17 18:45:40,424 | INFO | Ficheros ignorados: 1
+2026-01-17 18:45:40,424 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 18:45:40,426 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 18:45:40,429 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 18:45:40,431 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 18:45:40,431 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 18:45:40,432 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 18:45:40,433 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 18:45:40,434 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 18:45:40,435 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 18:45:40,435 | INFO | Fin del pipeline ETL
+2026-01-17 19:00:31,917 | INFO | Inicio del pipeline ETL
+2026-01-17 19:00:31,917 | INFO | Clientes encontrados: 1
+2026-01-17 19:00:31,917 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:00:31,917 | INFO | Ficheros ignorados: 1
+2026-01-17 19:00:31,917 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:00:31,919 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:00:31,925 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 19:00:31,925 | WARNING | CLIENTES motivo='dni_invalido' -> 25
+2026-01-17 19:00:31,925 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-17 19:00:31,927 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 19:00:31,927 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:00:31,928 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:00:31,930 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:00:31,930 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:00:31,932 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 19:00:31,932 | INFO | Fin del pipeline ETL
+2026-01-17 19:06:12,457 | INFO | Inicio del pipeline ETL
+2026-01-17 19:06:12,458 | INFO | Clientes encontrados: 1
+2026-01-17 19:06:12,458 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:06:12,458 | INFO | Ficheros ignorados: 1
+2026-01-17 19:06:12,458 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:06:12,460 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:06:12,463 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 19:06:12,464 | WARNING | CLIENTES motivo='dni_invalido' -> 25
+2026-01-17 19:06:12,464 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-17 19:06:12,466 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 19:06:12,466 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:06:12,466 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:06:12,468 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:06:12,468 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:06:12,470 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 19:06:12,470 | INFO | Fin del pipeline ETL
+2026-01-17 19:12:33,440 | INFO | Inicio del pipeline ETL
+2026-01-17 19:12:33,441 | INFO | Clientes encontrados: 1
+2026-01-17 19:12:33,441 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:12:33,441 | INFO | Ficheros ignorados: 1
+2026-01-17 19:12:33,441 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:12:33,443 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:12:33,446 | ERROR | Error procesando CLIENTES: Clientes-2025-11-10.csv
+Traceback (most recent call last):
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'error_detalle'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 70, in main
+    df, errs = validate_clientes(df)
+               ~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\validate_clientes.py", line 57, in validate_clientes
+    invalid["error"] = invalid["error_detalle"]
+                       ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\pandas\core\frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\pandas\core\indexes\base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'error_detalle'
+2026-01-17 19:12:33,467 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:12:33,468 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:12:33,469 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:12:33,471 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:12:33,471 | INFO | No hay filas erróneas. No se generan CSV de rechazadas
+2026-01-17 19:12:33,471 | INFO | Fin del pipeline ETL
+2026-01-17 19:12:52,716 | INFO | Inicio del pipeline ETL
+2026-01-17 19:12:52,716 | INFO | Clientes encontrados: 1
+2026-01-17 19:12:52,716 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:12:52,716 | INFO | Ficheros ignorados: 1
+2026-01-17 19:12:52,716 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:12:52,718 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:12:52,723 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 19:12:52,723 | WARNING | CLIENTES motivo='dni_invalido' -> 25
+2026-01-17 19:12:52,723 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-17 19:12:52,725 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 19:12:52,725 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:12:52,726 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:12:52,728 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:12:52,728 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:12:52,730 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 19:12:52,730 | INFO | Fin del pipeline ETL
+2026-01-17 19:13:27,216 | INFO | Inicio del pipeline ETL
+2026-01-17 19:13:27,216 | INFO | Clientes encontrados: 1
+2026-01-17 19:13:27,216 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:13:27,216 | INFO | Ficheros ignorados: 1
+2026-01-17 19:13:27,216 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:13:27,218 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:13:27,224 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 19:13:27,224 | WARNING | CLIENTES motivo='dni_invalido' -> 25
+2026-01-17 19:13:27,224 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-17 19:13:27,226 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 19:13:27,227 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:13:27,227 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:13:27,229 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:13:27,230 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:13:27,231 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 19:13:27,231 | INFO | Fin del pipeline ETL
+2026-01-17 19:18:00,569 | INFO | Inicio del pipeline ETL
+2026-01-17 19:18:00,570 | INFO | Clientes encontrados: 1
+2026-01-17 19:18:00,570 | INFO | Tarjetas encontradas: 1
+2026-01-17 19:18:00,570 | INFO | Ficheros ignorados: 1
+2026-01-17 19:18:00,570 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-17 19:18:00,572 | INFO | Filas leídas CLIENTES: 30
+2026-01-17 19:18:00,576 | WARNING | Filas rechazadas CLIENTES: 30
+2026-01-17 19:18:00,576 | WARNING | CLIENTES motivo='dni_invalido' -> 25
+2026-01-17 19:18:00,576 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-17 19:18:00,578 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-17 19:18:00,578 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-17 19:18:00,579 | INFO | Filas leídas TARJETAS: 29
+2026-01-17 19:18:00,580 | INFO | Filas rechazadas TARJETAS: 0
+2026-01-17 19:18:00,581 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-17 19:18:00,582 | WARNING | Total filas erróneas registradas: 30
+2026-01-17 19:18:00,583 | INFO | Fin del pipeline ETL
