@@ -16,12 +16,7 @@ def write_errors_by_source(error_dfs: list[pd.DataFrame], output_dir: str = "err
     if "origen" not in errors_df.columns:
         return
 
-    DROP_TARJETAS_FLAGS = [
-        "CodCliente_OK", "CodCliente_KO",
-        "FechaExp_OK", "FechaExp_KO",
-        "Tarjeta_OK", "Tarjeta_KO",
-        "card_clean",
-    ]
+
 
     for origen, group in errors_df.groupby("origen"):
         group = group.copy()
@@ -32,7 +27,7 @@ def write_errors_by_source(error_dfs: list[pd.DataFrame], output_dir: str = "err
         origen_up = str(origen).upper()
 
         if origen_up == "TARJETAS":
-            group.drop(columns=DROP_TARJETAS_FLAGS, inplace=True, errors="ignore")
+
             desired = [
                 "origen", "error", "error_detalle",
                 "cod_cliente", "fecha_exp",

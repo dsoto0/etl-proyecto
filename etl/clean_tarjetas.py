@@ -26,14 +26,6 @@ def hash_card(card_digits: str) -> str | None:
 
 
 def clean_tarjetas(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Limpia columnas, normaliza campos y genera:
-      - card_clean (solo dígitos)
-      - numero_tarjeta_masked
-      - numero_tarjeta_hash
-    Elimina CVV y numero_tarjeta original del output final.
-    NO valida: eso va en validate_tarjetas.py
-    """
     df = df.copy()
     df.columns = [c.strip().lower() for c in df.columns]
 
