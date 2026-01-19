@@ -3,7 +3,6 @@ import re
 import hashlib
 import os
 
-# IMPORTANTE: lo ideal es definir CARD_SALT en variable de entorno y NO commitearla
 SALT = os.getenv("CARD_SALT", "etl_grupo_salt")
 
 
@@ -26,18 +25,16 @@ def hash_card(card_digits: str) -> str | None:
     return hashlib.sha256((SALT + card_digits).encode("utf-8")).hexdigest()
 
 
-def clean_tarjetas(df: pd.DataFrame):
+def clean_tarjetas(df: pd.DataFrame) -> pd.DataFrame:
     """
-    - Limpia formatos de tarjeta
-    - Genera numero_tarjeta_masked y numero_tarjeta_hash
-    - Elimina cvv COMPLETAMENTE del fichero final
-    Devuelve:
-      - df_limpio
-      - lista de dataframes con filas rechazadas (incluye columna 'error')
+    Limpia columnas, normaliza campos y genera:
+      - card_clean (solo dígitos)
+      - numero_tarjeta_masked
+      - numero_tarjeta_hash
+    Elimina CVV y numero_tarjeta original del output final.
+    NO valida: eso va en validate_tarjetas.py
     """
     df = df.copy()
-    errors = []
-
     df.columns = [c.strip().lower() for c in df.columns]
 
     df["cod_cliente"] = df["cod_cliente"].astype(str).str.strip()
@@ -47,13 +44,7 @@ def clean_tarjetas(df: pd.DataFrame):
     df["numero_tarjeta_masked"] = df["card_clean"].apply(mask_card)
     df["numero_tarjeta_hash"] = df["card_clean"].apply(hash_card)
 
-    invalid = df[df["card_clean"].isna()]
-    if not invalid.empty:
-        invalid = invalid.copy()
-        invalid["error"] = "tarjeta_invalida"
-        errors.append(invalid)
+    # Eliminar sensibles (CVV nunca se guarda)
+    df.drop(columns=["numero_tarjeta", "cvv"], inplace=True, errors="ignore")
 
-    # Eliminar sensibles: numero_tarjeta original + cvv
-    df.drop(columns=["numero_tarjeta", "cvv", "card_clean"], inplace=True, errors="ignore")
-
-    return df, errors
+    return df

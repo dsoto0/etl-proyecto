@@ -6,9 +6,10 @@ sys.path.append(str(PROJECT_ROOT))
 
 from etl.file_discovery import discover_files
 from etl.reader import read_csv_safe
-from etl.cleaning import clean_dataframe
+from etl.clean_clientes import clean_dataframe
 from etl.validate_clientes import validate_clientes
 from etl.clean_tarjetas import clean_tarjetas
+from etl.validate_tarjetas import validate_tarjetas
 from etl.errors import write_errors_by_source
 from etl.logger import setup_logger
 
@@ -23,17 +24,11 @@ def _count_errors(err_list) -> int:
 
 
 def _log_error_details(logger, err_list, title: str):
-    """
-    Loguea los motivos más frecuentes (error_detalle) para entender por qué se rechaza.
-    """
     if not err_list:
         return
-
     try:
-        # Une solo para analítica de motivos (no para guardar)
         import pandas as pd
         merged = pd.concat(err_list, ignore_index=True)
-
         if "error_detalle" in merged.columns:
             top = merged["error_detalle"].value_counts().head(5)
             for motivo, cnt in top.items():
@@ -59,7 +54,7 @@ def main():
 
     all_errors = []
 
-    # --- CLIENTES ---
+    #  CLIENTES
     for file in clientes:
         try:
             logger.info(f"Procesando CLIENTES: {file.name}")
@@ -85,14 +80,15 @@ def main():
         except Exception:
             logger.exception(f"Error procesando CLIENTES: {file.name}")
 
-    # --- TARJETAS ---
+    #Clean de tarjetas por separado
     for file in tarjetas:
         try:
             logger.info(f"Procesando TARJETAS: {file.name}")
             df = read_csv_safe(file)
             logger.info(f"Filas leídas TARJETAS: {len(df)}")
 
-            df, errs = clean_tarjetas(df)
+            df = clean_tarjetas(df)          # SOLO transforma (mask/hash + borra cvv)
+            df, errs = validate_tarjetas(df) # SOLO valida (devuelve df_valid + errs)
 
             rejected = _count_errors(errs)
             if rejected > 0:
@@ -103,6 +99,18 @@ def main():
 
             all_errors.extend(errs)
 
+            # NO guarda los flags OK/KO en el output final de tarjetas
+            df.drop(
+                columns=[
+                    "card_clean",
+                    "CodCliente_OK", "CodCliente_KO",
+                    "FechaExp_OK", "FechaExp_KO",
+                    "Tarjeta_OK", "Tarjeta_KO",
+                ],
+                inplace=True,
+                errors="ignore"
+            )
+
             out = OUTPUT_PATH / f"{file.stem}.cleaned.csv"
             df.to_csv(out, index=False)
             logger.info(f"Archivo generado: {out}")
@@ -110,7 +118,7 @@ def main():
         except Exception:
             logger.exception(f"Error procesando TARJETAS: {file.name}")
 
-    # --- ERRORES (separados por origen) ---
+    #  ERRORES (separados por origen)
     total_rejected = _count_errors(all_errors)
     if total_rejected > 0:
         write_errors_by_source(all_errors, output_dir=str(ERRORS_PATH))
