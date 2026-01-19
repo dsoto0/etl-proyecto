@@ -1,1 +1,26 @@
 cod cliente,nombre,apellido1,apellido2,dni,correo,telefono,DNI_OK,DNI_KO,Telefono_OK,Telefono_KO,Correo_OK,Correo_KO
+C001,Maria,Garcia,Perez,12345678A,maria.garcia@example.com,612345678,Y,N,Y,N,Y,N
+C002,JOSE,LOPEZ,HERNANDEZ,87654321B,jose.lopez@example.com,612345679,Y,N,Y,N,Y,N
+C003,Ana-Maria,Ruiz,,23456789C,ana.ruiz@example.com,612345680,Y,N,Y,N,Y,N
+C004,Luis,Sanchez,Gomez,45678901D,luis.sanchez@correo.es,612345004,Y,N,Y,N,Y,N
+C005,Carmen,Romero,Diaz,56789012E,carmen.romero@correo.es,612345005,Y,N,Y,N,Y,N
+C006,David,Navarro,Ortega,67890123F,david.navarro@correo.es,612345006,Y,N,Y,N,Y,N
+C007,Laura,Torres,Vega,78901234G,laura.torres@correo.es,612345007,Y,N,Y,N,Y,N
+C008,Javier,Flores,Ramos,89012345H,javier.flores@correo.es,612345008,Y,N,Y,N,Y,N
+C009,Elena,Castro,Molina,90123456J,elena.castro@correo.es,612345009,Y,N,Y,N,Y,N
+C010,Pablo,Suarez,Gil,01234567K,pablo.suarez@correo.es,612345010,Y,N,Y,N,Y,N
+C011,Marta,Blanco,Iglesias,11223344L,marta.blanco@correo.es,612345011,Y,N,Y,N,Y,N
+C012,Sergio,Medina,Santos,22334455M,sergio.medina@correo.es,612345012,Y,N,Y,N,Y,N
+C013,Lucia,Cruz,Delgado,33445566N,lucia.cruz@correo.es,612345013,Y,N,Y,N,Y,N
+C014,Raul,Prieto,Calvo,44556677P,raul.prieto@correo.es,612345014,Y,N,Y,N,Y,N
+C015,Patricia,Leon,Fuentes,55667788Q,patricia.leon@correo.es,612345015,Y,N,Y,N,Y,N
+C016,Alberto,Herrera,Marin,66778899R,alberto.herrera@correo.es,612345016,Y,N,Y,N,Y,N
+C017,Natalia,Vargas,Cano,77889900S,natalia.vargas@correo.es,612345017,Y,N,Y,N,Y,N
+C018,Ivan,Mendez,Pera,88990011T,ivan.mendez@correo.es,612345018,Y,N,Y,N,Y,N
+C019,Silvia,Reyes,Campos,99001122U,silvia.reyes@correo.es,612345019,Y,N,Y,N,Y,N
+C020,Hugo,Guerrero,Luna,10111223V,hugo.guerrero@correo.es,612345020,Y,N,Y,N,Y,N
+C021,Rosa,Morales,Nieto,12131415W,rosa.morales@correo.es,612345021,Y,N,Y,N,Y,N
+C022,Daniel,Ortiz,Pardo,13141516X,daniel.ortiz@correo.es,612345022,Y,N,Y,N,Y,N
+C023,Beatriz,Rubio,Serrano,14151617Y,beatriz.rubio@correo.es,612345023,Y,N,Y,N,Y,N
+C024,Fernando,Ramirez,Cortes,15161718Z,fernando.ramirez@correo.es,612345024,Y,N,Y,N,Y,N
+C025,Irene,Aguilar,Pastor,16171819A,irene.aguilar@correo.es,612345025,Y,N,Y,N,Y,N

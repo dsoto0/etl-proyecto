@@ -4,12 +4,17 @@ import re
 DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE"
 
 def is_valid_dni(dni: str) -> bool:
+    """
+    Validación "soft": SOLO formato.
+    Acepta 8 dígitos + 1 letra (A-Z). No comprueba letra real.
+    """
     if not dni:
         return False
     dni = str(dni).strip().upper()
-    if not re.fullmatch(r"[0-9]{8}[A-Z]", dni):
-        return False
-    return DNI_LETTERS[int(dni[:8]) % 23] == dni[-1]
+    # opcional: quita espacios/guiones/puntos por si vienen sucios
+    dni = re.sub(r"[\s\-\.]", "", dni)
+    return bool(re.fullmatch(r"\d{8}[A-Z]", dni))
+
 
 def is_valid_phone(phone: str) -> bool:
     if not phone:
