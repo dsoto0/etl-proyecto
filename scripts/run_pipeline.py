@@ -6,7 +6,7 @@ sys.path.append(str(PROJECT_ROOT))
 
 from etl.file_discovery import discover_files
 from etl.reader import read_csv_safe
-from etl.clean_clientes import clean_dataframe
+from etl.clean_clientes import clean_dataframe_clientes
 from etl.validate_clientes import validate_clientes
 from etl.clean_tarjetas import clean_tarjetas
 from etl.validate_tarjetas import validate_tarjetas
@@ -54,15 +54,32 @@ def main():
 
     all_errors = []
 
-    #  CLIENTES
+    # -----------------
+    # CLIENTES
+    # -----------------
     for file in clientes:
         try:
             logger.info(f"Procesando CLIENTES: {file.name}")
+
             df = read_csv_safe(file)
             logger.info(f"Filas leídas CLIENTES: {len(df)}")
 
-            df = clean_dataframe(df)
+            df = clean_dataframe_clientes(df)
             df, errs = validate_clientes(df)
+
+            # 👉 dejar SOLO el DNI enmascarado como "dni"
+            df.drop(columns=["dni"], inplace=True, errors="ignore")
+            df.rename(columns={"dni_masked": "dni"}, inplace=True)
+
+            # 👉 orden correcto con cod_cliente al principio
+            desired_cols = [
+                "cod_cliente", "nombre", "apellido1",
+                "apellido2","dni", "correo", "telefono",
+                "DNI_OK", "DNI_KO", "Telefono_OK", "Telefono_KO",
+                 "Correo_OK", "Correo_KO",
+            ]
+            df = df[[c for c in desired_cols if c in df.columns]
+                    + [c for c in df.columns if c not in desired_cols]]
 
             rejected = _count_errors(errs)
             if rejected > 0:
@@ -73,22 +90,24 @@ def main():
 
             all_errors.extend(errs)
 
+
             out = OUTPUT_PATH / f"{file.stem}.cleaned.csv"
             df.to_csv(out, index=False)
-            logger.info(f"Archivo generado: {out}")
+            logger.info(f"Archivo generado: {out.name}")
 
         except Exception:
             logger.exception(f"Error procesando CLIENTES: {file.name}")
 
-    #Clean de tarjetas por separado
+    # TARJETAS
     for file in tarjetas:
         try:
             logger.info(f"Procesando TARJETAS: {file.name}")
+
             df = read_csv_safe(file)
             logger.info(f"Filas leídas TARJETAS: {len(df)}")
 
-            df = clean_tarjetas(df)          # SOLO transforma (mask/hash + borra cvv)
-            df, errs = validate_tarjetas(df) # SOLO valida (devuelve df_valid + errs)
+            df = clean_tarjetas(df)
+            df, errs = validate_tarjetas(df)
 
             rejected = _count_errors(errs)
             if rejected > 0:
@@ -99,26 +118,28 @@ def main():
 
             all_errors.extend(errs)
 
-            # NO guarda los flags OK/KO en el output final de tarjetas
             df.drop(
                 columns=[
                     "card_clean",
-                    "CodCliente_OK", "CodCliente_KO",
-                    "FechaExp_OK", "FechaExp_KO",
-                    "Tarjeta_OK", "Tarjeta_KO",
+                    "CodCliente_OK",
+                    "CodCliente_KO",
+                    "FechaExp_OK",
+                    "FechaExp_KO",
+                    "Tarjeta_OK",
+                    "Tarjeta_KO",
                 ],
                 inplace=True,
-                errors="ignore"
+                errors="ignore",
             )
 
             out = OUTPUT_PATH / f"{file.stem}.cleaned.csv"
             df.to_csv(out, index=False)
-            logger.info(f"Archivo generado: {out}")
+            logger.info(f"Archivo generado: {out.name}")
 
         except Exception:
             logger.exception(f"Error procesando TARJETAS: {file.name}")
 
-    #  ERRORES (separados por origen)
+    # ERRORES
     total_rejected = _count_errors(all_errors)
     if total_rejected > 0:
         write_errors_by_source(all_errors, output_dir=str(ERRORS_PATH))

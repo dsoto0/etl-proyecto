@@ -685,3 +685,83 @@ ValueError: too many values to unpack (expected 2, got 3)
 2026-01-20 00:46:45,719 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
 2026-01-20 00:46:45,724 | WARNING | Total filas erróneas registradas: 6
 2026-01-20 00:46:45,724 | INFO | Fin del pipeline ETL
+2026-01-20 01:05:20,947 | INFO | Inicio del pipeline ETL
+2026-01-20 01:05:20,948 | INFO | Clientes encontrados: 1
+2026-01-20 01:05:20,948 | INFO | Tarjetas encontradas: 1
+2026-01-20 01:05:20,948 | INFO | Ficheros ignorados: 1
+2026-01-20 01:05:20,948 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 01:05:20,950 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 01:05:20,955 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 01:05:20,956 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 01:05:20,957 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Clientes-2025-11-10.cleaned.csv
+2026-01-20 01:05:20,957 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 01:05:20,958 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 01:05:20,961 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 01:05:20,961 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 01:05:20,962 | INFO | Archivo generado: C:\Users\jorge\IdeaProjects\etl-proyecto\data\output\Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 01:05:20,967 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 01:05:20,967 | INFO | Fin del pipeline ETL
+2026-01-20 01:15:14,208 | INFO | Inicio del pipeline ETL
+2026-01-20 01:15:14,209 | INFO | Clientes encontrados: 1
+2026-01-20 01:15:14,209 | INFO | Tarjetas encontradas: 1
+2026-01-20 01:15:14,209 | INFO | Ficheros ignorados: 1
+2026-01-20 01:15:14,209 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 01:15:14,212 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 01:15:14,217 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 01:15:14,218 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 01:15:14,219 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-20 01:15:14,219 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 01:15:14,220 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 01:15:14,223 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 01:15:14,224 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 01:15:14,224 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 01:15:14,230 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 01:15:14,230 | INFO | Fin del pipeline ETL
+2026-01-20 01:24:38,049 | INFO | Inicio del pipeline ETL
+2026-01-20 01:24:38,049 | INFO | Clientes encontrados: 1
+2026-01-20 01:24:38,049 | INFO | Tarjetas encontradas: 1
+2026-01-20 01:24:38,049 | INFO | Ficheros ignorados: 1
+2026-01-20 01:24:38,049 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 01:24:38,052 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 01:24:38,058 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 01:24:38,058 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 01:24:38,059 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-20 01:24:38,059 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 01:24:38,060 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 01:24:38,064 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 01:24:38,064 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 01:24:38,065 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 01:24:38,070 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 01:24:38,070 | INFO | Fin del pipeline ETL
+2026-01-20 01:24:59,663 | INFO | Inicio del pipeline ETL
+2026-01-20 01:24:59,664 | INFO | Clientes encontrados: 1
+2026-01-20 01:24:59,664 | INFO | Tarjetas encontradas: 1
+2026-01-20 01:24:59,664 | INFO | Ficheros ignorados: 1
+2026-01-20 01:24:59,664 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 01:24:59,667 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 01:24:59,672 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 01:24:59,672 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 01:24:59,673 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-20 01:24:59,673 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 01:24:59,675 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 01:24:59,677 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 01:24:59,678 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 01:24:59,678 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 01:24:59,684 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 01:24:59,684 | INFO | Fin del pipeline ETL
+2026-01-20 01:34:37,071 | INFO | Inicio del pipeline ETL
+2026-01-20 01:34:37,072 | INFO | Clientes encontrados: 1
+2026-01-20 01:34:37,072 | INFO | Tarjetas encontradas: 1
+2026-01-20 01:34:37,072 | INFO | Ficheros ignorados: 1
+2026-01-20 01:34:37,072 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 01:34:37,075 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 01:34:37,080 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 01:34:37,081 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 01:34:37,082 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-20 01:34:37,082 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 01:34:37,083 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 01:34:37,086 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 01:34:37,087 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 01:34:37,088 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 01:34:37,093 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 01:34:37,093 | INFO | Fin del pipeline ETL
