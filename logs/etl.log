@@ -765,3 +765,19 @@ ValueError: too many values to unpack (expected 2, got 3)
 2026-01-20 01:34:37,088 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
 2026-01-20 01:34:37,093 | WARNING | Total filas erróneas registradas: 6
 2026-01-20 01:34:37,093 | INFO | Fin del pipeline ETL
+2026-01-20 19:54:50,761 | INFO | Inicio del pipeline ETL
+2026-01-20 19:54:50,762 | INFO | Clientes encontrados: 1
+2026-01-20 19:54:50,762 | INFO | Tarjetas encontradas: 1
+2026-01-20 19:54:50,762 | INFO | Ficheros ignorados: 1
+2026-01-20 19:54:50,762 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-20 19:54:50,783 | INFO | Filas leídas CLIENTES: 30
+2026-01-20 19:54:50,792 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-20 19:54:50,793 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-20 19:54:50,797 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-20 19:54:50,797 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-20 19:54:50,812 | INFO | Filas leídas TARJETAS: 30
+2026-01-20 19:54:50,818 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-20 19:54:50,818 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-20 19:54:50,821 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-20 19:54:50,832 | WARNING | Total filas erróneas registradas: 6
+2026-01-20 19:54:50,832 | INFO | Fin del pipeline ETL
