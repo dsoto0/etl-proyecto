@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="532cc564-ebc0-4c1b-81c5-1e9c3c2ba936" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/output/Clientes-2025-11-10.cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/output/Clientes-2025-11-10.cleaned.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/errors/rows_rejected_clientes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/errors/rows_rejected_clientes.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/etl.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/etl.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/dsoto0/etl-proyecto.git&quot;,
-    &quot;accountId&quot;: &quot;77bbd8c7-1d48-4daa-a015-4a9bf1c35f19&quot;
+    &quot;accountId&quot;: &quot;03a82696-c174-4945-b19b-bd5491f774fc&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -93,13 +95,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
