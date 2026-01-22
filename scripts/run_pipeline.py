@@ -54,9 +54,9 @@ def main():
 
     all_errors = []
 
-    # -----------------
+
     # CLIENTES
-    # -----------------
+
     for file in clientes:
         try:
             logger.info(f"Procesando CLIENTES: {file.name}")
@@ -67,11 +67,11 @@ def main():
             df = clean_dataframe_clientes(df)
             df, errs = validate_clientes(df)
 
-            # 👉 dejar SOLO el DNI enmascarado como "dni"
+
             df.drop(columns=["dni"], inplace=True, errors="ignore")
             df.rename(columns={"dni_masked": "dni"}, inplace=True)
 
-            # 👉 orden correcto con cod_cliente al principio
+
             desired_cols = [
                 "cod_cliente", "nombre", "apellido1",
                 "apellido2","dni", "correo", "telefono",
