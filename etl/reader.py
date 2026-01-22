@@ -10,11 +10,17 @@ def read_csv_safe(path):
         encoding="utf-8",
         dtype=str,
         on_bad_lines="skip",
-        engine="python",             # más tolerante
+        engine="python",
         quoting=csv.QUOTE_MINIMAL,
         escapechar="\\",
         keep_default_na=False,       # evita que pandas invente los NaN “solo”
     )
+
+    #  normalizacion  del nombre de la columna de clientes
+    df.columns = df.columns.str.replace("\ufeff", "", regex=False).str.strip()
+    if "cod cliente" in df.columns:
+        df.rename(columns={"cod cliente": "cod_cliente"}, inplace=True)
+
 
     # Normaliza nulos: "" / "NULL" / "None" / "nan" -> None
     def _norm(x):
@@ -30,4 +36,5 @@ def read_csv_safe(path):
         df = df.applymap(_norm)
 
     return df
+
 
