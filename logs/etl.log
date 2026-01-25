@@ -1136,3 +1136,179 @@ DETAIL:  La llave (cod_cliente)=(C099) no está presente en la tabla «clientes�
 2026-01-25 17:58:56,226 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
 2026-01-25 17:58:56,227 | INFO | Carga a PostgreSQL completada
 2026-01-25 17:58:56,227 | INFO | Fin del pipeline ETL
+2026-01-25 18:30:50,736 | INFO | Inicio del pipeline ETL
+2026-01-25 18:30:50,739 | INFO | Clientes encontrados: 1
+2026-01-25 18:30:50,740 | INFO | Tarjetas encontradas: 1
+2026-01-25 18:30:50,740 | INFO | Ficheros ignorados: 1
+2026-01-25 18:30:50,741 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 18:30:50,749 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 18:30:50,786 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 18:30:50,789 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 18:30:50,844 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 18:30:50,902 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 18:30:50,929 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 18:30:50,951 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-25 18:30:50,956 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-25 18:30:50,961 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-25 18:30:51,001 | WARNING | Total filas erróneas registradas: 6
+2026-01-25 18:30:51,001 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 18:30:51,004 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 18:30:51,175 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 18:30:51,186 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 18:30:51,188 | INFO | Carga a PostgreSQL completada
+2026-01-25 18:30:51,189 | INFO | Fin del pipeline ETL
+2026-01-25 19:05:23,558 | INFO | Inicio del pipeline ETL
+2026-01-25 19:05:23,559 | INFO | Clientes encontrados: 1
+2026-01-25 19:05:23,559 | INFO | Tarjetas encontradas: 1
+2026-01-25 19:05:23,559 | INFO | Ficheros ignorados: 1
+2026-01-25 19:05:23,559 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 19:05:23,563 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 19:05:23,569 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 19:05:23,569 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 19:05:23,571 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 19:05:23,571 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 19:05:23,572 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 19:05:23,573 | ERROR | Error procesando TARJETAS: Tarjetas-2025-11-10.csv
+Traceback (most recent call last):
+  File "c:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\scripts\run_pipeline.py", line 111, in main
+    df = clean_tarjetas(df)
+  File "C:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\etl\clean_tarjetas.py", line 36, in clean_tarjetas
+    df["numero_tarjeta_masked"] = df["card_clean"].apply(mask_card)
+                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\series.py", line 5084, in apply
+    ).apply()
+      ~~~~~^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\apply.py", line 1520, in apply
+    return self.apply_standard()
+           ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\apply.py", line 1578, in apply_standard
+    mapped = obj._map_values(mapper=curried)
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\base.py", line 1020, in _map_values
+    return arr.map(mapper, na_action=na_action)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\base.py", line 2692, in map
+    return map_array(self, mapper, na_action=na_action)
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\algorithms.py", line 1710, in map_array
+    return lib.map_infer(values, mapper)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "pandas/_libs/lib.pyx", line 3071, in pandas._libs.lib.map_infer
+  File "C:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\etl\clean_tarjetas.py", line 17, in mask_card
+    if not card_digits or len(card_digits) < 4:
+                          ~~~^^^^^^^^^^^^^
+TypeError: object of type 'float' has no len()
+2026-01-25 19:05:23,578 | WARNING | Total filas erróneas registradas: 5
+2026-01-25 19:05:23,578 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 19:05:23,579 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 19:05:23,728 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 19:05:23,730 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 19:05:23,730 | INFO | Carga a PostgreSQL completada
+2026-01-25 19:05:23,731 | INFO | Fin del pipeline ETL
+2026-01-25 19:10:39,154 | INFO | Inicio del pipeline ETL
+2026-01-25 19:10:39,154 | INFO | Clientes encontrados: 1
+2026-01-25 19:10:39,154 | INFO | Tarjetas encontradas: 1
+2026-01-25 19:10:39,155 | INFO | Ficheros ignorados: 1
+2026-01-25 19:10:39,155 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 19:10:39,158 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 19:10:39,163 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 19:10:39,164 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 19:10:39,165 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 19:10:39,165 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 19:10:39,167 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 19:10:39,170 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-25 19:10:39,170 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-25 19:10:39,171 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-25 19:10:39,174 | WARNING | Total filas erróneas registradas: 6
+2026-01-25 19:10:39,175 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 19:10:39,175 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 19:10:39,213 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 19:10:39,222 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 19:10:39,223 | INFO | Carga a PostgreSQL completada
+2026-01-25 19:10:39,223 | INFO | Fin del pipeline ETL
+2026-01-25 19:12:31,151 | INFO | Inicio del pipeline ETL
+2026-01-25 19:12:31,152 | INFO | Clientes encontrados: 1
+2026-01-25 19:12:31,152 | INFO | Tarjetas encontradas: 1
+2026-01-25 19:12:31,152 | INFO | Ficheros ignorados: 1
+2026-01-25 19:12:31,152 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 19:12:31,156 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 19:12:31,161 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 19:12:31,162 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 19:12:31,164 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 19:12:31,164 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 19:12:31,165 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 19:12:31,166 | ERROR | Error procesando TARJETAS: Tarjetas-2025-11-10.csv
+Traceback (most recent call last):
+  File "c:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\scripts\run_pipeline.py", line 111, in main
+    df = clean_tarjetas(df)
+  File "C:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\etl\clean_tarjetas.py", line 36, in clean_tarjetas
+    df["numero_tarjeta_masked"] = df["card_clean"].apply(mask_card)
+                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\series.py", line 5084, in apply
+    ).apply()
+      ~~~~~^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\apply.py", line 1520, in apply
+    return self.apply_standard()
+           ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\apply.py", line 1578, in apply_standard
+    mapped = obj._map_values(mapper=curried)
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\base.py", line 1020, in _map_values
+    return arr.map(mapper, na_action=na_action)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\base.py", line 2692, in map
+    return map_array(self, mapper, na_action=na_action)
+  File "C:\Users\sotos\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\algorithms.py", line 1710, in map_array
+    return lib.map_infer(values, mapper)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "pandas/_libs/lib.pyx", line 3071, in pandas._libs.lib.map_infer
+  File "C:\Users\sotos\Downloads\etl-proyecto\etl-proyecto\etl\clean_tarjetas.py", line 17, in mask_card
+    if not card_digits or len(card_digits) < 4:
+                          ~~~^^^^^^^^^^^^^
+TypeError: object of type 'float' has no len()
+2026-01-25 19:12:31,170 | WARNING | Total filas erróneas registradas: 5
+2026-01-25 19:12:31,171 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 19:12:31,171 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 19:12:31,201 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 19:12:31,203 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 19:12:31,204 | INFO | Carga a PostgreSQL completada
+2026-01-25 19:12:31,204 | INFO | Fin del pipeline ETL
+2026-01-25 19:13:13,402 | INFO | Inicio del pipeline ETL
+2026-01-25 19:13:13,403 | INFO | Clientes encontrados: 1
+2026-01-25 19:13:13,403 | INFO | Tarjetas encontradas: 1
+2026-01-25 19:13:13,403 | INFO | Ficheros ignorados: 1
+2026-01-25 19:13:13,403 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 19:13:13,406 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 19:13:13,411 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 19:13:13,411 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 19:13:13,413 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 19:13:13,413 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 19:13:13,414 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 19:13:13,418 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-25 19:13:13,418 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-25 19:13:13,419 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-25 19:13:13,422 | WARNING | Total filas erróneas registradas: 6
+2026-01-25 19:13:13,422 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 19:13:13,423 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 19:13:13,453 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 19:13:13,456 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 19:13:13,456 | INFO | Carga a PostgreSQL completada
+2026-01-25 19:13:13,456 | INFO | Fin del pipeline ETL
+2026-01-25 19:25:06,518 | INFO | Inicio del pipeline ETL
+2026-01-25 19:25:06,519 | INFO | Clientes encontrados: 1
+2026-01-25 19:25:06,519 | INFO | Tarjetas encontradas: 1
+2026-01-25 19:25:06,519 | INFO | Ficheros ignorados: 1
+2026-01-25 19:25:06,519 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-25 19:25:06,522 | INFO | Filas leídas CLIENTES: 30
+2026-01-25 19:25:06,527 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-25 19:25:06,528 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-25 19:25:06,529 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-25 19:25:06,529 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-25 19:25:06,530 | INFO | Filas leídas TARJETAS: 30
+2026-01-25 19:25:06,534 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-25 19:25:06,534 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-25 19:25:06,535 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-25 19:25:06,538 | WARNING | Total filas erróneas registradas: 6
+2026-01-25 19:25:06,538 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-25 19:25:06,539 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-25 19:25:06,569 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-25 19:25:06,572 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-25 19:25:06,572 | INFO | Carga a PostgreSQL completada
+2026-01-25 19:25:06,572 | INFO | Fin del pipeline ETL
