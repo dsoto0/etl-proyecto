@@ -37,11 +37,10 @@ def _get_conn():
 
     host = _clean_env(os.getenv("PGHOST", "localhost"))
     port = int(_clean_env(os.getenv("PGPORT", "5432")))
-    dbname = _clean_env(os.getenv("PGDATABASE", "etlproyect"))  
+    dbname = _clean_env(os.getenv("PGDATABASE", "etlproyect"))
     user = _clean_env(os.getenv("PGUSER", "postgres"))
     password = _clean_env(os.getenv("PGPASSWORD", ""))
 
-    
     os.environ["PGCLIENTENCODING"] = "UTF8"
     os.environ["PGOPTIONS"] = "-c client_encoding=UTF8"
 
@@ -53,6 +52,55 @@ def _get_conn():
         password=password,
         connect_timeout=5,
     )
+
+
+def ensure_schema(conn, logger=None):
+    """
+    Crea las tablas en public si no existen.
+    Esto hace que si borras tablas y vuelves a ejecutar el pipeline, se vuelvan a crear.
+    """
+    ddl = """
+          CREATE TABLE IF NOT EXISTS public.clientes (
+                                                         cod_cliente VARCHAR(10) PRIMARY KEY,
+              nombre VARCHAR(100),
+              apellido1 VARCHAR(100),
+              apellido2 VARCHAR(100),
+              dni VARCHAR(20),
+              correo VARCHAR(150),
+              telefono VARCHAR(30),
+              dni_ok BOOLEAN,
+              dni_ko BOOLEAN,
+              telefono_ok BOOLEAN,
+              telefono_ko BOOLEAN,
+              correo_ok BOOLEAN,
+              correo_ko BOOLEAN
+              );
+
+          CREATE TABLE IF NOT EXISTS public.tarjetas (
+                                                         id_tarjeta BIGSERIAL PRIMARY KEY,
+                                                         cod_cliente VARCHAR(10) NOT NULL,
+              fecha_exp VARCHAR(7),
+              numero_tarjeta_masked VARCHAR(25),
+              numero_tarjeta_hash VARCHAR(80) NOT NULL,
+              CONSTRAINT fk_tarjetas_cliente
+              FOREIGN KEY (cod_cliente) REFERENCES public.clientes(cod_cliente)
+              ON UPDATE CASCADE ON DELETE CASCADE,
+              CONSTRAINT uq_tarjeta_cliente_hash
+              UNIQUE (cod_cliente, numero_tarjeta_hash)
+              ); \
+          """
+    with conn.cursor() as cur:
+        # Debug útil para ver dónde estás conectado
+        cur.execute("SELECT current_user, current_database(), current_schema();")
+        user, dbname, schema = cur.fetchone()
+        if logger:
+            logger.info(f"BD: conectado como user='{user}' db='{dbname}' schema='{schema}'")
+
+        cur.execute(ddl)
+
+    conn.commit()
+    if logger:
+        logger.info("BD: tablas verificadas/creadas (public.clientes, public.tarjetas)")
 
 
 def _load_clientes_csv(conn, csv_path: Path, logger=None):
@@ -96,64 +144,63 @@ def _load_clientes_csv(conn, csv_path: Path, logger=None):
             df[c] = None
 
     df = df[cols]
-
     rows = [tuple(x) for x in df.to_numpy()]
 
     sql = """
-    INSERT INTO clientes (
-      cod_cliente, nombre, apellido1, apellido2, dni, correo, telefono,
-      dni_ok, dni_ko, telefono_ok, telefono_ko, correo_ok, correo_ko
-    )
-    VALUES %s
-    ON CONFLICT (cod_cliente) DO UPDATE SET
-      nombre=EXCLUDED.nombre,
-      apellido1=EXCLUDED.apellido1,
-      apellido2=EXCLUDED.apellido2,
-      dni=EXCLUDED.dni,
-      correo=EXCLUDED.correo,
-      telefono=EXCLUDED.telefono,
-      dni_ok=EXCLUDED.dni_ok,
-      dni_ko=EXCLUDED.dni_ko,
-      telefono_ok=EXCLUDED.telefono_ok,
-      telefono_ko=EXCLUDED.telefono_ko,
-      correo_ok=EXCLUDED.correo_ok,
-      correo_ko=EXCLUDED.correo_ko
-    ;
-    """
+          INSERT INTO public.clientes (
+              cod_cliente, nombre, apellido1, apellido2, dni, correo, telefono,
+              dni_ok, dni_ko, telefono_ok, telefono_ko, correo_ok, correo_ko
+          )
+          VALUES %s
+              ON CONFLICT (cod_cliente) DO UPDATE SET
+              nombre=EXCLUDED.nombre,
+                                               apellido1=EXCLUDED.apellido1,
+                                               apellido2=EXCLUDED.apellido2,
+                                               dni=EXCLUDED.dni,
+                                               correo=EXCLUDED.correo,
+                                               telefono=EXCLUDED.telefono,
+                                               dni_ok=EXCLUDED.dni_ok,
+                                               dni_ko=EXCLUDED.dni_ko,
+                                               telefono_ok=EXCLUDED.telefono_ok,
+                                               telefono_ko=EXCLUDED.telefono_ko,
+                                               correo_ok=EXCLUDED.correo_ok,
+                                               correo_ko=EXCLUDED.correo_ko
+          ; \
+          """
 
     with conn.cursor() as cur:
         execute_values(cur, sql, rows, page_size=1000)
-    conn.commit()
 
+    conn.commit()
     if logger:
         logger.info(f"BD: clientes cargados desde {csv_path.name} -> {len(rows)} filas")
 
 
-
 def _load_tarjetas_csv(conn, csv_path: Path, logger=None):
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, dtype=str)
     df.columns = [c.strip() for c in df.columns]
 
     cols = ["cod_cliente", "fecha_exp", "numero_tarjeta_masked", "numero_tarjeta_hash"]
-    df = df[[c for c in cols if c in df.columns]]
+    for c in cols:
+        if c not in df.columns:
+            df[c] = None
+    df = df[cols]
 
     rows = [tuple(x) for x in df.to_numpy()]
 
-    # IMPORTANTE: requiere UNIQUE(cod_cliente, numero_tarjeta_hash) en la tabla tarjetas
     sql = """
-    INSERT INTO tarjetas (cod_cliente, fecha_exp, numero_tarjeta_masked, numero_tarjeta_hash)
-    VALUES %s
-    ON CONFLICT (cod_cliente, numero_tarjeta_hash) DO UPDATE SET
-      fecha_exp=EXCLUDED.fecha_exp,
-      numero_tarjeta_masked=EXCLUDED.numero_tarjeta_masked
-    ;
-    """
+          INSERT INTO public.tarjetas (cod_cliente, fecha_exp, numero_tarjeta_masked, numero_tarjeta_hash)
+          VALUES %s
+              ON CONFLICT (cod_cliente, numero_tarjeta_hash) DO UPDATE SET
+              fecha_exp=EXCLUDED.fecha_exp,
+                                                                    numero_tarjeta_masked=EXCLUDED.numero_tarjeta_masked
+          ; \
+          """
 
     with conn.cursor() as cur:
         execute_values(cur, sql, rows, page_size=1000)
 
     conn.commit()
-
     if logger:
         logger.info(f"BD: tarjetas cargadas desde {csv_path.name} -> {len(rows)} filas")
 
@@ -169,6 +216,9 @@ def load_cleaned_to_postgres(output_dir: Path, logger=None):
 
     conn = _get_conn()
     try:
+        # ✅ esto es lo que te faltaba: si borras tablas, aquí se recrean
+        ensure_schema(conn, logger=logger)
+
         # Primero clientes (por FK)
         for f in clientes_files:
             _load_clientes_csv(conn, f, logger=logger)
