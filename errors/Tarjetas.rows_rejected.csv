@@ -1,0 +1,5 @@
+cod_cliente;fecha_exp;numero_tarjeta_masked;numero_tarjeta_hash;error
+cod_cliente;fecha_exp;;;cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida
+None;2027-06;XXXX-XXXX-XXXX-9012;7a2e2e1ab862bde82c544ca0fd411ecd46efbc434651195f7ed65a7d953d9150;cod_cliente_invalido
+C901;2027-13;XXXX-XXXX-XXXX-9012;7a2e2e1ab862bde82c544ca0fd411ecd46efbc434651195f7ed65a7d953d9150;fecha_exp_invalida
+C903;None;XXXX-XXXX-XXXX-9012;7a2e2e1ab862bde82c544ca0fd411ecd46efbc434651195f7ed65a7d953d9150;fecha_exp_invalida

@@ -1,0 +1,5 @@
+cod_cliente;nombre;apellido1;apellido2;dni;correo;telefono;DNI_OK;DNI_KO;Telefono_OK;Telefono_KO;Correo_OK;Correo_KO;error
+C900;Lucia;Martin;Santos;1234A;lucia.martin@example.com;612345679;N;Y;Y;N;Y;N;dni_invalido
+C901;Andres;Lopez;Ruiz;87654321B;andres.lopez@@example.com;612345680;Y;N;Y;N;N;Y;correo_invalido
+C902;Eva;Nunez;Saez;13579135C;eva.nunez@example.com;61680;Y;N;N;Y;Y;N;telefono_invalido
+C903;Juan;Perez;Garcia;00000000T;none;612345682;Y;N;Y;N;N;Y;correo_invalido
