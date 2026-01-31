@@ -1,2 +1,0 @@
-origen,error,error_detalle,cod_cliente,fecha_exp,CodCliente_OK,CodCliente_KO,FechaExp_OK,FechaExp_KO,Tarjeta_OK,Tarjeta_KO
-TARJETAS,validacion_tarjeta,cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida,321424,None,N,Y,N,Y,N,Y

@@ -1,6 +1,0 @@
-origen,error,error_detalle,nombre,apellido1,apellido2,dni,correo,telefono,DNI_OK,DNI_KO,Telefono_OK,Telefono_KO,Correo_OK,Correo_KO,cod cliente
-CLIENTES,validacion_cliente,dni_invalido|telefono_invalido|correo_invalido,5500000000000003,2029-02,808,NONE,none,None,N,Y,N,Y,N,Y,C003
-CLIENTES,validacion_cliente,dni_invalido|telefono_invalido|correo_invalido,5500000000000007,2029-03,909,NONE,none,None,N,Y,N,Y,N,Y,C007
-CLIENTES,validacion_cliente,dni_invalido|telefono_invalido|correo_invalido,5500000000000010,2029-04,111,NONE,none,None,N,Y,N,Y,N,Y,C010
-CLIENTES,validacion_cliente,dni_invalido|telefono_invalido|correo_invalido,5500000000000015,2029-05,222,NONE,none,None,N,Y,N,Y,N,Y,C015
-CLIENTES,validacion_cliente,dni_invalido|telefono_invalido|correo_invalido,5500000000000020,2029-06,333,NONE,none,None,N,Y,N,Y,N,Y,C020
