@@ -10,7 +10,7 @@ from etl.clean_clientes import clean_dataframe_clientes
 from etl.validate_clientes import validate_clientes
 from etl.clean_tarjetas import clean_tarjetas
 from etl.validate_tarjetas import validate_tarjetas
-from etl.errors import write_errors_by_source
+from etl.errors import write_rows_rejected_clientes_tarjetas
 from etl.logger import setup_logger
 import etl.db_loader as db_loader
 
@@ -55,9 +55,7 @@ def main():
 
     all_errors = []
 
-    
     # CLIENTES
-    
     for file in clientes:
         try:
             logger.info(f"Procesando CLIENTES: {file.name}")
@@ -68,11 +66,11 @@ def main():
             df = clean_dataframe_clientes(df)
             df, errs = validate_clientes(df)
 
-            
+            # En cleaned renombrar dni_masked a dni
             df.drop(columns=["dni"], inplace=True, errors="ignore")
             df.rename(columns={"dni_masked": "dni"}, inplace=True)
 
-           
+            # Reordenar columnas  (primero datos, luego flags)
             desired_cols = [
                 "cod_cliente", "nombre", "apellido1",
                 "apellido2", "dni", "correo", "telefono",
@@ -92,15 +90,13 @@ def main():
             all_errors.extend(errs)
 
             out = OUTPUT_PATH / f"{file.stem}.cleaned.csv"
-            df.to_csv(out, index=False)
+            df.to_csv(out, index=False, sep=";", encoding="utf-8")
             logger.info(f"Archivo generado: {out.name}")
 
         except Exception:
             logger.exception(f"Error procesando CLIENTES: {file.name}")
 
-   
     # TARJETAS
-    
     for file in tarjetas:
         try:
             logger.info(f"Procesando TARJETAS: {file.name}")
@@ -120,6 +116,7 @@ def main():
 
             all_errors.extend(errs)
 
+            # En cleaned NO guardamos columnas auxiliares
             df.drop(
                 columns=[
                     "card_clean",
@@ -135,26 +132,26 @@ def main():
             )
 
             out = OUTPUT_PATH / f"{file.stem}.cleaned.csv"
-            df.to_csv(out, index=False)
+            df.to_csv(out, index=False, sep=";", encoding="utf-8")
             logger.info(f"Archivo generado: {out.name}")
 
         except Exception:
             logger.exception(f"Error procesando TARJETAS: {file.name}")
 
-   
     # ERRORES
-    
     total_rejected = _count_errors(all_errors)
     if total_rejected > 0:
-        write_errors_by_source(all_errors, output_dir=str(ERRORS_PATH))
+        write_rows_rejected_clientes_tarjetas(
+            all_errors,
+            output_dir=str(ERRORS_PATH),
+            include_motivo=True,   # pon False si no quieres la columna motivo
+            logger=logger
+        )
         logger.warning(f"Total filas erróneas registradas: {total_rejected}")
     else:
         logger.info("No hay filas erróneas. No se generan CSV de rechazadas")
 
-
-
     # CARGA A POSTGRESQL
-
     try:
         logger.info("Iniciando carga de cleaned a PostgreSQL...")
         db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
