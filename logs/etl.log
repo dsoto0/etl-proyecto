@@ -1312,3 +1312,253 @@ TypeError: object of type 'float' has no len()
 2026-01-25 19:25:06,572 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
 2026-01-25 19:25:06,572 | INFO | Carga a PostgreSQL completada
 2026-01-25 19:25:06,572 | INFO | Fin del pipeline ETL
+2026-01-31 19:18:28,931 | INFO | Inicio del pipeline ETL
+2026-01-31 19:18:28,932 | INFO | Clientes encontrados: 1
+2026-01-31 19:18:28,932 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:18:28,932 | INFO | Ficheros ignorados: 1
+2026-01-31 19:18:28,932 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:18:28,940 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:18:28,949 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:18:28,949 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:18:28,953 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:18:28,953 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:18:28,955 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:18:28,959 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:18:28,959 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:18:28,960 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:18:28,964 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:18:28,964 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:18:28,964 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:18:28,998 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 170, in load_cleaned_to_postgres
+    conn = _get_conn()
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 48, in _get_conn
+    return psycopg2.connect(
+           ~~~~~~~~~~~~~~~~^
+        host=host,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        connect_timeout=5,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
+2026-01-31 19:18:28,999 | INFO | Fin del pipeline ETL
+2026-01-31 19:30:20,050 | INFO | Inicio del pipeline ETL
+2026-01-31 19:30:20,051 | INFO | Clientes encontrados: 1
+2026-01-31 19:30:20,051 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:30:20,051 | INFO | Ficheros ignorados: 1
+2026-01-31 19:30:20,051 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:30:20,054 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:30:20,060 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:30:20,060 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:30:20,061 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:30:20,061 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:30:20,063 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:30:20,066 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:30:20,066 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:30:20,067 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:30:20,070 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:30:20,070 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:30:20,071 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:30:20,104 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 171, in load_cleaned_to_postgres
+    conn = _get_conn()
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 48, in _get_conn
+    return psycopg2.connect(
+           ~~~~~~~~~~~~~~~~^
+        host=host,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        options="-c lc_messages=C -c client_encoding=UTF8",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
+2026-01-31 19:30:20,105 | INFO | Fin del pipeline ETL
+2026-01-31 19:36:31,194 | INFO | Inicio del pipeline ETL
+2026-01-31 19:36:31,194 | INFO | Clientes encontrados: 1
+2026-01-31 19:36:31,194 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:36:31,194 | INFO | Ficheros ignorados: 1
+2026-01-31 19:36:31,194 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:36:31,197 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:36:31,203 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:36:31,203 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:36:31,204 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:36:31,204 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:36:31,206 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:36:31,209 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:36:31,209 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:36:31,210 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:36:31,213 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:36:31,213 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:36:31,213 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:36:31,247 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 171, in load_cleaned_to_postgres
+    conn = _get_conn()
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 48, in _get_conn
+    return psycopg2.connect(
+           ~~~~~~~~~~~~~~~~^
+        host=host,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        options="-c lc_messages=C -c client_encoding=UTF8",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
+2026-01-31 19:36:31,248 | INFO | Fin del pipeline ETL
+2026-01-31 19:39:26,234 | INFO | Inicio del pipeline ETL
+2026-01-31 19:39:26,234 | INFO | Clientes encontrados: 1
+2026-01-31 19:39:26,234 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:39:26,234 | INFO | Ficheros ignorados: 1
+2026-01-31 19:39:26,234 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:39:26,237 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:39:26,243 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:39:26,243 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:39:26,244 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:39:26,244 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:39:26,246 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:39:26,249 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:39:26,249 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:39:26,250 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:39:26,253 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:39:26,253 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:39:26,253 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:39:26,287 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 171, in load_cleaned_to_postgres
+    conn = _get_conn()
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 48, in _get_conn
+    return psycopg2.connect(
+           ~~~~~~~~~~~~~~~~^
+        host=host,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        options="-c lc_messages=C -c client_encoding=UTF8",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xab in position 76: invalid start byte
+2026-01-31 19:39:26,288 | INFO | Fin del pipeline ETL
+2026-01-31 19:46:54,763 | INFO | Inicio del pipeline ETL
+2026-01-31 19:46:54,764 | INFO | Clientes encontrados: 1
+2026-01-31 19:46:54,764 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:46:54,764 | INFO | Ficheros ignorados: 1
+2026-01-31 19:46:54,764 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:46:54,767 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:46:54,773 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:46:54,774 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:46:54,775 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:46:54,775 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:46:54,776 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:46:54,780 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:46:54,780 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:46:54,781 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:46:54,784 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:46:54,784 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:46:54,785 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:46:54,821 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 171, in load_cleaned_to_postgres
+    conn = _get_conn()
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 48, in _get_conn
+    return psycopg2.connect(
+           ~~~~~~~~~~~~~~~~^
+        host=host,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        options="-c lc_messages=C -c client_encoding=UTF8",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  se ha denegado el permiso para cambiar la opción «lc_messages»
+
+2026-01-31 19:46:54,822 | INFO | Fin del pipeline ETL
+2026-01-31 19:47:51,764 | INFO | Inicio del pipeline ETL
+2026-01-31 19:47:51,765 | INFO | Clientes encontrados: 1
+2026-01-31 19:47:51,765 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:47:51,765 | INFO | Ficheros ignorados: 1
+2026-01-31 19:47:51,765 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:47:51,769 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:47:51,775 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:47:51,775 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:47:51,776 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:47:51,776 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:47:51,778 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:47:51,781 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:47:51,781 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:47:51,782 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:47:51,786 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:47:51,786 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:47:51,786 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:47:51,831 | ERROR | Fallo en la carga a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\scripts\run_pipeline.py", line 160, in main
+    db_loader.load_cleaned_to_postgres(OUTPUT_PATH, logger=logger)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 176, in load_cleaned_to_postgres
+    _load_clientes_csv(conn, f, logger=logger)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\IdeaProjects\etl-proyecto\etl\db_loader.py", line 127, in _load_clientes_csv
+    execute_values(cur, sql, rows, page_size=1000)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jorge\AppData\Local\Programs\Python\Python314\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: no existe la relación «clientes»
+LINE 2:     INSERT INTO clientes (
+                        ^
+
+2026-01-31 19:47:51,832 | INFO | Fin del pipeline ETL
+2026-01-31 19:51:39,106 | INFO | Inicio del pipeline ETL
+2026-01-31 19:51:39,107 | INFO | Clientes encontrados: 1
+2026-01-31 19:51:39,107 | INFO | Tarjetas encontradas: 1
+2026-01-31 19:51:39,107 | INFO | Ficheros ignorados: 1
+2026-01-31 19:51:39,107 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-01-31 19:51:39,110 | INFO | Filas leídas CLIENTES: 30
+2026-01-31 19:51:39,117 | WARNING | Filas rechazadas CLIENTES: 5
+2026-01-31 19:51:39,118 | WARNING | CLIENTES motivo='dni_invalido|telefono_invalido|correo_invalido' -> 5
+2026-01-31 19:51:39,119 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-01-31 19:51:39,119 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-01-31 19:51:39,120 | INFO | Filas leídas TARJETAS: 30
+2026-01-31 19:51:39,124 | WARNING | Filas rechazadas TARJETAS: 1
+2026-01-31 19:51:39,124 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-01-31 19:51:39,125 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-01-31 19:51:39,128 | WARNING | Total filas erróneas registradas: 6
+2026-01-31 19:51:39,129 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-01-31 19:51:39,129 | INFO | BD: found cleaned clientes=1 tarjetas=1
+2026-01-31 19:51:39,163 | INFO | BD: conectado como user='etl_user' db='etlproyect' schema='public'
+2026-01-31 19:51:39,178 | INFO | BD: tablas verificadas/creadas (public.clientes, public.tarjetas)
+2026-01-31 19:51:39,184 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-01-31 19:51:39,188 | INFO | BD: tarjetas cargadas desde Tarjetas-2025-11-10.cleaned.csv -> 29 filas
+2026-01-31 19:51:39,188 | INFO | Carga a PostgreSQL completada
+2026-01-31 19:51:39,188 | INFO | Fin del pipeline ETL
