@@ -6,7 +6,7 @@ El proyecto está pensado con una **arquitectura modular**, separando responsabi
 
 ---
 
-## 🎯 Objetivo del proyecto
+##  Objetivo del proyecto
 
 * Automatizar la ingesta de datos desde archivos CSV
 * Detectar y registrar errores de calidad de datos
@@ -18,7 +18,7 @@ Este proyecto puede utilizarse como **ejercicio académico**, **prueba técnica*
 
 ---
 
-## 🧱 Arquitectura ETL
+##  Arquitectura ETL
 
 El pipeline sigue el flujo clásico:
 
@@ -40,7 +40,7 @@ El pipeline sigue el flujo clásico:
 
 ---
 
-## 📂 Estructura del proyecto (detalle completo)
+##  Estructura del proyecto (detalle completo)
 
 ```
 etl-proyecto/
@@ -71,9 +71,9 @@ etl-proyecto/
 
 ---
 
-## 🗂️ Descripción de archivos y módulos
+##  Descripción de archivos y módulos
 
-### 🔧 Configuración
+###  Configuración
 
 #### `config.yaml`
 
@@ -93,7 +93,7 @@ Lista de dependencias necesarias para ejecutar el proyecto. Facilita la instalac
 
 ---
 
-## 📁 Directorio `data/`
+##  Directorio `data/`
 
 ### `data/raw/`
 
@@ -105,7 +105,7 @@ Almacena los **archivos procesados y limpios**, listos para análisis o carga en
 
 ---
 
-## ❌ Directorio `errors/`
+##  Directorio `errors/`
 
 Aquí se guardan los registros que **no cumplen las reglas de validación**. Cada archivo contiene:
 
@@ -116,7 +116,7 @@ Esto permite auditar errores y mejorar la calidad de los datos de origen.
 
 ---
 
-## 🧠 Directorio `etl/` (lógica del pipeline)
+##  Directorio `etl/` (lógica del pipeline)
 
 ### `file_discovery.py`
 
@@ -184,7 +184,7 @@ Configura el **sistema de logging**, permitiendo registrar eventos, advertencias
 
 ---
 
-## 📜 Directorio `scripts/`
+##  Directorio `scripts/`
 
 ### `run_pipeline.py`
 
@@ -200,7 +200,7 @@ Script principal del proyecto. Orquesta todo el flujo ETL:
 
 ---
 
-## 🗄️ Directorio `sql/`
+##  Directorio `sql/`
 
 ### `schema.sql`
 
@@ -208,7 +208,7 @@ Define el **esquema de la base de datos**, incluyendo tablas, tipos de datos y r
 
 ---
 
-## ⚙️ Requisitos del sistema
+##  Requisitos del sistema
 
 * Python 3.10 o superior
 * pip
@@ -221,7 +221,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Ejecución del pipeline
+##  Ejecución del pipeline
 
 Desde la raíz del proyecto:
 
@@ -237,7 +237,7 @@ Durante la ejecución:
 
 ---
 
-## 📊 Logs
+##  Logs
 
 El archivo `logs/etl.log` contiene:
 
@@ -248,19 +248,7 @@ El archivo `logs/etl.log` contiene:
 
 ---
 
-## 🔮 Posibles mejoras futuras
 
-* Tests automatizados
-* Validaciones con esquemas (Great Expectations / Pandera)
-* Orquestación con Airflow
-* Dockerización del proyecto
-* Integración con APIs externas
-
----
-
-## 📄 Licencia
-
-Proyecto de uso educativo y demostrativo. Puede adaptarse y reutilizarse libremente.
 
 ---
 
