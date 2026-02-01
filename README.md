@@ -247,9 +247,3 @@ El archivo `logs/etl.log` contiene:
 * Detalles de errores
 
 ---
-
-
-
----
-
-✍️ Desarrollado en Python como proyecto ETL modular y escalable.
