@@ -31,7 +31,7 @@ def _clean_env(v: str | None, default: str = "") -> str:
 
 
 def _get_conn():
-  # Carga variables de entorno desde .env en el directorio padre del proyecto
+    # Carga variables de entorno desde .env en el directorio padre del proyecto
     load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env", override=True)
 
     host = _clean_env(os.getenv("PGHOST", "localhost"))
@@ -74,16 +74,17 @@ def ensure_schema(conn, logger=None):
               correo_ko BOOLEAN
               );
 
-          -- TARJETAS: 1 fila por cod_cliente (evita duplicados)
+          -- TARJETAS: varias por cliente; sin duplicados por (cod_cliente, numero_tarjeta_hash)
           CREATE TABLE IF NOT EXISTS public.tarjetas (
-                                                         cod_cliente VARCHAR(10) PRIMARY KEY,
+                                                         cod_cliente VARCHAR(10) NOT NULL,
               fecha_exp VARCHAR(7),
               numero_tarjeta_masked VARCHAR(25),
               numero_tarjeta_hash VARCHAR(80) NOT NULL,
               CONSTRAINT fk_tarjetas_cliente
               FOREIGN KEY (cod_cliente)
               REFERENCES public.clientes(cod_cliente)
-              ON UPDATE CASCADE ON DELETE CASCADE
+              ON UPDATE CASCADE ON DELETE CASCADE,
+              PRIMARY KEY (cod_cliente, numero_tarjeta_hash)
               );
           """
 
@@ -173,13 +174,10 @@ def _existing_client_codes(conn) -> set[str]:
         return {r[0] for r in cur.fetchall()}
 
 
-#  TARJETAS: consolidación por cod_cliente (mayor fecha_exp)
-
+# TARJETAS: merge de todos los CSV y dedupe SOLO por (cod_cliente, numero_tarjeta_hash)
 def _merge_tarjetas_keep_latest(tarjetas_files: list[Path]) -> pd.DataFrame:
-    # Lee múltiples CSV de tarjetas cleaned y los fusiona,
     dfs = []
     for f in tarjetas_files:
-        #  cada uno en un DataFrame
         dfs.append(pd.read_csv(f, dtype=str, sep=";", encoding="utf-8"))
 
     if not dfs:
@@ -195,13 +193,10 @@ def _merge_tarjetas_keep_latest(tarjetas_files: list[Path]) -> pd.DataFrame:
         if c not in df.columns:
             df[c] = None
 
-    df["_fecha_dt"] = pd.to_datetime(df["fecha_exp"].astype(str).str.strip() + "-01", errors="coerce")
 
-    # Ordenar y quedarnos con la más “nueva”
-    df = df.sort_values(by=["cod_cliente", "_fecha_dt"], ascending=[True, True])
-    df = df.drop_duplicates(subset=["cod_cliente"], keep="last")
+    # Solo eliminamos duplicados exactos de la misma tarjeta del mismo cliente.
+    df = df.drop_duplicates(subset=["cod_cliente", "numero_tarjeta_hash"], keep="first")
 
-    df = df.drop(columns=["_fecha_dt"])
     return df[["cod_cliente", "fecha_exp", "numero_tarjeta_masked", "numero_tarjeta_hash"]]
 
 
@@ -222,13 +217,14 @@ def _insert_tarjetas_df(conn, df: pd.DataFrame, logger=None, source="merged"):
 
     rows = [tuple(x) for x in df.to_numpy()]
 
+    #  Conflicto por clave compuesta (cliente + tarjeta)
     sql = """
           INSERT INTO public.tarjetas (cod_cliente, fecha_exp, numero_tarjeta_masked, numero_tarjeta_hash)
           VALUES %s
-              ON CONFLICT (cod_cliente) DO UPDATE SET
+              ON CONFLICT (cod_cliente, numero_tarjeta_hash) DO UPDATE SET
               fecha_exp=EXCLUDED.fecha_exp,
-                                               numero_tarjeta_masked=EXCLUDED.numero_tarjeta_masked,
-                                               numero_tarjeta_hash=EXCLUDED.numero_tarjeta_hash;
+                                                                    numero_tarjeta_masked=EXCLUDED.numero_tarjeta_masked,
+                                                                    numero_tarjeta_hash=EXCLUDED.numero_tarjeta_hash;
           """
 
     with conn.cursor() as cur:
@@ -275,11 +271,11 @@ def load_cleaned_to_postgres(output_dir: Path, logger=None):
         for f in clientes_files:
             _load_clientes_csv(conn, f, logger=logger)
 
-        #  TARJETAS: fusionar y quedarse con mayor fecha_exp por cod_cliente
+        #  TARJETAS: merge total sin decidir por fecha (solo dedupe por tarjeta)
         df_merged = _merge_tarjetas_keep_latest(tarjetas_files)
 
         if logger:
-            logger.info(f"BD: tarjetas merged -> {len(df_merged)} filas tras deduplicar por cod_cliente")
+            logger.info(f"BD: tarjetas merged -> {len(df_merged)} filas tras deduplicar por (cod_cliente, numero_tarjeta_hash)")
 
         #  filtro FK: solo clientes existentes
         existing = _existing_client_codes(conn)
@@ -295,7 +291,7 @@ def load_cleaned_to_postgres(output_dir: Path, logger=None):
             cur.execute("TRUNCATE TABLE public.tarjetas;")
         conn.commit()
 
-        _insert_tarjetas_df(conn, df_merged, logger=logger, source="merged tarjetas (max fecha_exp)")
+        _insert_tarjetas_df(conn, df_merged, logger=logger, source="merged tarjetas (todas por cliente, sin duplicados)")
 
     finally:
         conn.close()
