@@ -2450,3 +2450,42 @@ LINE 2:           CREATE TABLE IF NOT EXISTS public.clientes (
 2026-02-07 13:00:53,803 | INFO | BD: tarjetas cargadas desde merged tarjetas (todas por cliente, sin duplicados) -> 63 filas
 2026-02-07 13:00:53,803 | INFO | Carga a PostgreSQL completada
 2026-02-07 13:00:53,803 | INFO | Fin del pipeline ETL
+2026-02-09 10:36:46,867 | INFO | Inicio del pipeline ETL
+2026-02-09 10:36:46,868 | INFO | Clientes encontrados: 2
+2026-02-09 10:36:46,868 | INFO | Tarjetas encontradas: 2
+2026-02-09 10:36:46,868 | INFO | Ficheros ignorados: 1
+2026-02-09 10:36:46,868 | INFO | Procesando CLIENTES: Clientes-2025-11-10.csv
+2026-02-09 10:36:46,878 | INFO | Filas leídas CLIENTES: 29
+2026-02-09 10:36:46,885 | WARNING | Filas rechazadas CLIENTES: 4
+2026-02-09 10:36:46,886 | WARNING | CLIENTES motivo='correo_invalido' -> 2
+2026-02-09 10:36:46,886 | WARNING | CLIENTES motivo='dni_invalido' -> 1
+2026-02-09 10:36:46,886 | WARNING | CLIENTES motivo='telefono_invalido' -> 1
+2026-02-09 10:36:46,891 | INFO | Archivo generado: Clientes-2025-11-10.cleaned.csv
+2026-02-09 10:36:46,891 | INFO | Procesando CLIENTES: Clientes-2026-01-19.csv
+2026-02-09 10:36:46,893 | INFO | Filas leídas CLIENTES: 50
+2026-02-09 10:36:46,897 | INFO | Filas rechazadas CLIENTES: 0
+2026-02-09 10:36:46,898 | INFO | Archivo generado: Clientes-2026-01-19.cleaned.csv
+2026-02-09 10:36:46,898 | INFO | Procesando TARJETAS: Tarjetas-2025-11-10.csv
+2026-02-09 10:36:46,900 | INFO | Filas leídas TARJETAS: 33
+2026-02-09 10:36:46,903 | WARNING | Filas rechazadas TARJETAS: 4
+2026-02-09 10:36:46,903 | WARNING | TARJETAS motivo='fecha_exp_invalida' -> 2
+2026-02-09 10:36:46,903 | WARNING | TARJETAS motivo='cod_cliente_invalido|fecha_exp_invalida|tarjeta_invalida' -> 1
+2026-02-09 10:36:46,903 | WARNING | TARJETAS motivo='cod_cliente_invalido' -> 1
+2026-02-09 10:36:46,904 | INFO | Archivo generado: Tarjetas-2025-11-10.cleaned.csv
+2026-02-09 10:36:46,904 | INFO | Procesando TARJETAS: Tarjetas-2026-01-19.csv
+2026-02-09 10:36:46,906 | INFO | Filas leídas TARJETAS: 60
+2026-02-09 10:36:46,908 | INFO | Filas rechazadas TARJETAS: 0
+2026-02-09 10:36:46,909 | INFO | Archivo generado: Tarjetas-2026-01-19.cleaned.csv
+2026-02-09 10:36:46,913 | WARNING | Generado C:\Users\jorge\IdeaProjects\etl-proyecto\errors\Clientes.rows_rejected.csv -> 4 filas rechazadas (CLIENTES)
+2026-02-09 10:36:46,913 | WARNING | Generado C:\Users\jorge\IdeaProjects\etl-proyecto\errors\Tarjetas.rows_rejected.csv -> 4 filas rechazadas (TARJETAS)
+2026-02-09 10:36:46,913 | WARNING | Total filas erróneas registradas: 8
+2026-02-09 10:36:46,913 | INFO | Iniciando carga de cleaned a PostgreSQL...
+2026-02-09 10:36:46,914 | INFO | BD: found cleaned clientes=2 tarjetas=2
+2026-02-09 10:36:46,971 | INFO | BD: conectado como user='etl_user' db='etlproyect' schema='public'
+2026-02-09 10:36:46,976 | INFO | BD: tablas verificadas/creadas (public.clientes, public.tarjetas)
+2026-02-09 10:36:46,989 | INFO | BD: clientes cargados desde Clientes-2025-11-10.cleaned.csv -> 25 filas
+2026-02-09 10:36:46,994 | INFO | BD: clientes cargados desde Clientes-2026-01-19.cleaned.csv -> 50 filas
+2026-02-09 10:36:46,996 | INFO | BD: tarjetas merged -> 63 filas tras deduplicar por (cod_cliente, numero_tarjeta_hash)
+2026-02-09 10:36:47,009 | INFO | BD: tarjetas cargadas desde merged tarjetas (todas por cliente, sin duplicados) -> 63 filas
+2026-02-09 10:36:47,009 | INFO | Carga a PostgreSQL completada
+2026-02-09 10:36:47,009 | INFO | Fin del pipeline ETL
