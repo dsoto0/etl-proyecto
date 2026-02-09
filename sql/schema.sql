@@ -14,15 +14,14 @@ CREATE TABLE IF NOT EXISTS public.clientes (
     correo_ko BOOLEAN
     );
 
--- TARJETAS: 1 fila por cod_cliente (evita duplicados)
 CREATE TABLE IF NOT EXISTS public.tarjetas (
-                                               cod_cliente VARCHAR(10) PRIMARY KEY,
+                                               cod_cliente VARCHAR(10) NOT NULL,
     fecha_exp VARCHAR(7),
     numero_tarjeta_masked VARCHAR(25),
     numero_tarjeta_hash VARCHAR(80) NOT NULL,
     CONSTRAINT fk_tarjetas_cliente
     FOREIGN KEY (cod_cliente)
     REFERENCES public.clientes(cod_cliente)
-    ON UPDATE CASCADE ON DELETE CASCADE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (cod_cliente, numero_tarjeta_hash)
     );
-
